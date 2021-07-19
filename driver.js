@@ -145,6 +145,8 @@ fs.watchFile(
       } else {
         console.log("[DRIVER] Broken Data");
         flag = false; //set to listening mode
+        dataString = "";
+        i = 0;
       }
     }
   }
