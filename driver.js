@@ -40,7 +40,7 @@ const listening = () => {
   var command2 = "";
   com2.question("", (reply) => {
     command2 = reply;
-    console.log(`Sending Command ${reply} \\n`);
+    console.log(`[DRIVER] Sending Command ${reply} \\n`);
     com2.close();
   });
 
@@ -48,12 +48,12 @@ const listening = () => {
     fs.writeFileSync("Rx.txt", `1`, "binary");
     if (command2 !== "") {
       if (command2 === "S") {
-        console.log("Command Recognized");
+        console.log("[DRIVER] Command Recognized");
         com2.close();
         sendSerial(converter(command2));
         clearInterval(idle);
       } else {
-        console.log("Command not Recognized");
+        console.log("[DRIVER] Command not Recognized");
         clearInterval(idle);
         listening();
       }
@@ -63,7 +63,7 @@ const listening = () => {
 
 //Call back function to send Command
 const sendSerial = (Com) => {
-  console.log("Send Serial");
+  console.log("[DRIVER]  Send Serial");
   var bit = 0;
   const sendCom = setInterval(function () {
     if (bit < 10) {
@@ -106,14 +106,14 @@ fs.watchFile(
     //idle State driver keeps sending 1
     if (decString === "1") {
       if (!flag) {
-        console.log("Listening.....");
+        console.log("[DRIVER] Listening.....");
       }
     }
     //receive initial Start bit 0
     if (decString === "0") {
       if (!flag) {
         flag = true; // set to receive mode
-        console.log("Receiving Data...");
+        console.log("[DRIVER] Receiving Data...");
       }
     }
 
@@ -129,17 +129,21 @@ fs.watchFile(
       else if (decString === "1") {
         var data = parseInt(dataString, 2);
         dataArray.push(data);
-        console.log("Received", data);
+        console.log("[DRIVER] Received", data);
         if (data === 10) {
           const bufData = Buffer.from(dataArray);
           dataArray = [];
-          console.log("Message is: ", bufData, bufData.toString("ascii"));
+          console.log(
+            "[DRIVER] Message is: ",
+            bufData,
+            bufData.toString("ascii")
+          );
         }
         flag = false; // set to listening mode
         dataString = "";
         i = 0;
       } else {
-        console.log("Broken Data");
+        console.log("[DRIVER] Broken Data");
         flag = false; //set to listening mode
       }
     }
@@ -149,11 +153,11 @@ fs.watchFile(
 //initialize idle function
 com1.question("", (reply) => {
   command = reply;
-  console.log(`Sending Command ${reply} \\n`);
+  console.log(`[DRIVER] Sending Command ${reply} \\n`);
   if (reply === "S") {
     com1.close();
   } else {
-    console.log("Command Not Recognized");
+    console.log("[DRIVER] Command Not Recognized");
     com1.close();
     listening();
   }

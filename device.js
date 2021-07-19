@@ -69,14 +69,14 @@ fs.watchFile(
     //idle State driver keeps sending 1
     if (decString === "1") {
       if (!flag) {
-        console.log("Listening.....");
+        console.log("[DEVICE] Listening.....");
       }
     }
     //receive initial Start bit 0
     if (decString === "0") {
       if (!flag) {
         flag = true; // set to receive mode
-        console.log("Receiving Data...");
+        console.log("[DEVICE] Receiving Data...");
       }
     }
 
@@ -92,12 +92,12 @@ fs.watchFile(
       else if (decString === "1") {
         var data = parseInt(dataString, 2);
         dataArray.push(data);
-        console.log("Received", data);
+        console.log("[DEVICE] Received", data);
         if (data === 10) {
           const bufData = Buffer.from(dataArray);
           dataArray = [];
           console.log(
-            "Command Recongnized",
+            "[DEVICE] Command Recongnized",
             bufData,
             bufData.toString("ascii")
           );
@@ -107,7 +107,7 @@ fs.watchFile(
         dataString = "";
         i = 0;
       } else {
-        console.log("Broken Data");
+        console.log("[DEVICE] Broken Data");
         flag = false; //set to listening mode
       }
     }
@@ -116,7 +116,7 @@ fs.watchFile(
 
 //Call back function to send Command
 const sendSerial = (Com) => {
-  console.log("Send Serial");
+  console.log("[DEVICE] Send Serial");
   var bit = 0;
   const sendCom = setInterval(function () {
     if (bit < Com.length) {

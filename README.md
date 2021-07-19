@@ -41,6 +41,8 @@ The device is a scale which sends stable wight to the driver when requested. The
 # Improvements
 
 - I did not have time to include the simulation of the parity bit as an extra checker for broken data.
+- I would like to add the ability for the device or driver to recognize that there is no connection to either.
+- When the scale is sending the data to driver if the driver requests for another weight the device doesnt respond with a busy statement. I would like to invest more time to look at how this can be itegrated.
 - If I had time I would look at standardizing the listening and transmitting function so a common function can be used by both device and driver.
 - Only the command S/n is available in the driver even though the commands send to the device is coded such that a variable command can be easily integrated. I didnt have time to add more functionality and commands.
 - It would be great if I had time to convert speed to baudRate and simulate the baudRate concept.
