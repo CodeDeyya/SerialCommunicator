@@ -65,4 +65,4 @@ The device is a scale which sends stable wight to the driver when requested. The
 
 # Time Taken
 
-I took 3- 4 Hours to complete the Task.
+I took 3- 4 Hours to complete the Task. Made a small fix taking around 5 min which I realized when testing the code.
