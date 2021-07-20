@@ -4,15 +4,8 @@ var flag = false;
 var dataArray = [];
 var decString = "";
 var dataString = "";
-var command = "";
 var i = 0;
 const speed = 400; //Higher speeds can cause data loss simmilar to (1/baudRate)
-
-//initiate communication port with user and driver
-const com1 = std.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
 
 //converter for converting string to binary packets
 const converter = (string) => {
@@ -152,20 +145,5 @@ fs.watchFile(
   }
 );
 
-//initialize idle function
-com1.question("", (reply) => {
-  command = reply;
-  console.log(`[DRIVER] Sending Command ${reply} \\n`);
-  com1.close();
-});
-const idle = setInterval(function () {
-  fs.writeFileSync("Rx.txt", `1`, "binary");
-  if (command === "S") {
-    clearInterval(idle);
-    sendSerial(converter(command));
-  } else {
-    console.log("[DRIVER] Command not Recognized");
-    clearInterval(idle);
-    listening();
-  }
-}, speed);
+//initialize listening
+listening();

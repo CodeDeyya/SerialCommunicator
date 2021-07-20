@@ -131,14 +131,5 @@ const sendSerial = (Com) => {
   }, speed);
 };
 
-//Function when idle initialize
-const idle = setInterval(function () {
-  fs.writeFileSync("Tx.txt", `1`, "binary");
-  if (command === "S\n") {
-    clearInterval(idle);
-    command = "";
-    var weight = Math.floor(Math.random() * (300 - 100) + 100);
-    var message = `Weight is ${weight.toString()} g`;
-    sendSerial(converter(message));
-  }
-}, speed);
+//initializing listening
+idleListen();
