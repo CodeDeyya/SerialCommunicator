@@ -156,18 +156,16 @@ fs.watchFile(
 com1.question("", (reply) => {
   command = reply;
   console.log(`[DRIVER] Sending Command ${reply} \\n`);
-  if (reply === "S") {
-    com1.close();
-  } else {
-    console.log("[DRIVER] Command Not Recognized");
-    com1.close();
-    listening();
-  }
+  com1.close();
 });
 const idle = setInterval(function () {
   fs.writeFileSync("Rx.txt", `1`, "binary");
   if (command === "S") {
     clearInterval(idle);
     sendSerial(converter(command));
+  } else {
+    console.log("[DRIVER] Command not Recognized");
+    clearInterval(idle);
+    listening();
   }
 }, speed);
