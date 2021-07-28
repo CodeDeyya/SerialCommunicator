@@ -7,7 +7,6 @@
 - [Improvements](#improvements)
 - [Technologies](#technologies)
 - [Libraries](#libraries)
-- [Time Taken](#time-taken)
 
 # Background
 
@@ -63,6 +62,3 @@ The device is a scale which sends stable wight to the driver when requested. The
 - **fs** library used for file handling
 - **readline** library used for getting input from user to driver
 
-# Time Taken
-
-I took 3- 4 Hours to complete the Task. I took around 30 min to test the code and found an issue with registering an unrecognized command in the initial loop. I fixed it and updated in new **update** branch. Also in the 30 min streamlined the initial functions.
